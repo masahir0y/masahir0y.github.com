@@ -8,13 +8,13 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
+title : とあるエンジニアの備忘log
 tagline: Site Tagline
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
+  name : Masahiro Yamada
+  email : masahir0yamad {AT} gmail {DOT} com
+  github : masahir0y
+  twitter : masahir0y
   feedburner : feedname
 
 # The production_url is only used when full-domain names are needed
@@ -128,3 +128,6 @@ JB :
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
   
+# maruku is buggy when generating lists.
+# I want to use rdiscount instead.
+markdown: rdiscount
