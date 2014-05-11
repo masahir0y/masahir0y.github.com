@@ -63,7 +63,8 @@ tags: [shell]
     case string in [ pattern [ | pattern ] ... ) command-list;; ] [ pattern [ | pattern ] ... ) command-list;; ] ...... esac
 
 
-シェルスクリプトを書くときに一行で書く人はいないでしょうが、makefile など一行で書かないといけないときがあるので、理解しておく必要があります。
+シェルスクリプトを書くときに一行で書く人はいないでしょうが、
+makefile など一行で書かないといけないときがあるので、理解しておく必要があります。
 
 どこに `;` を入れるかは、覚えておかなくても理屈で考えればわかります。
 
@@ -88,3 +89,33 @@ tags: [shell]
 `command <<\EOF` または `command <<'EOF'` のようにすると `......` の部分全体がクォートされることになり、変数は展開されなくなります。
 
 また `command <<-EOF` のようにすると `......` 中の行頭のタブは無視されます。
+
+### 入力リダイレクト拡張 ###
+
+bash でのみ使える機能ですが、
+
+    command <<< string
+
+`command` の標準入力にリダイレクトで文字列 `string` を流す。
+
+    echo foo | sed 's/foo/bar'
+
+を
+
+    sed 's/foo/bar/' <<< foo
+
+のように書くことができる。
+
+### 標準エラー出力のパイプ ###
+
+これも bash でのみ使える機能ですが、
+
+    command1 |& command2
+
+は `command1` の標準エラー出力をパイプに流す。
+
+例えば、
+
+    command1 |& tee log
+
+は `command1` の標準エラー出力を `log` ファイルに記録することができる。
