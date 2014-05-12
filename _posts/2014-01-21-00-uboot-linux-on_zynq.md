@@ -389,6 +389,7 @@ ZED ボードならば
     $ make zynq_zed CROSS_COMPILE=arm-linux-gnueabi-
 
 となる。
+
 U-Boot の `boards.cfg` というファイルを見れば、自分のボードに対応するコマンドがわかる。
 
 Linux の Device Tree も `arch/arm/boot/dts` ディレクトリに各ボードごとの DTB
