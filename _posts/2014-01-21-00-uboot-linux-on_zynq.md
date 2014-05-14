@@ -282,10 +282,10 @@ ITB を作るには、 ITS(Image Tree Source) を記述して、 `mkimage` に�
 
   - `u-boot-dtb.bin`: STEP1 で作成したもの
   - `fit.itb`: STEP4 で作成したもの
-  - `xmd`: Vivado (または ISE)のインストールディレクトリに入っている
-  - `ps7_init.tcl`: Vivado (または ISE)から "Export Hardware for SDK" を実行すると出力される
+  - `xmd`: ISE / Vivado のインストールディレクトリに入っている
+  - `ps7_init.tcl`: ISE / Vivado から "Export Hardware for SDK" を実行すると出力される
   - `stub.tcl`: Xilinx のページからダウンロードできる `ug873-design-files.zip` の中に入っている
-  - `fpga.bit`: Vivado (または ISE)で生成した FPGA bit file (Optional)
+  - `fpga.bit`: ISE / Vivado で生成した FPGA bit file (Optional)
 
 ##### Task Description
 
@@ -297,16 +297,16 @@ Zynq ボードのブートモードの選択スイッチを JTAG に合わせて
 
 XMD のプロンプトから以下を実行する。(FPGA は必要なければダウンロードしなくても良い)
 
-    XMD% connect arm hw                         # Open JTAG connection
-    XMD% rst -slcr                              # Reset the whole system
-    XMD% fpga -f fpga.bit                       # Download FPGA bit file (Optional)
+    XMD% connect arm hw                         ;# Open JTAG connection
+    XMD% rst -slcr                              ;# Reset the whole system
+    XMD% fpga -f fpga.bit                       ;# Download FPGA bit file (Optional)
     XMD% source ps7_init.tcl
-    XMD% ps7_init                               # Initialize DDR, IO pins, etc.
-    XMD% ps7_post_config                        # Enable level shifter
-    XMD% source stub.tcl                        # start CPU1
-    XMD% targets 64                             # connect to CPU0
-    XMD% dow -data u-boot-dtb.bin 0x04000000    # Download u-boot to address 0x04000000 
-    XMD% con 0x04000000                         # start CPU0 from address 0x04000000
+    XMD% ps7_init                               ;# Initialize DDR, IO pins, etc.
+    XMD% ps7_post_config                        ;# Enable level shifter
+    XMD% source stub.tcl                        ;# start CPU1
+    XMD% targets 64                             ;# connect to CPU0
+    XMD% dow -data u-boot-dtb.bin 0x04000000    ;# Download u-boot to address 0x04000000
+    XMD% con 0x04000000                         ;# start CPU0 from address 0x04000000
 
 なお、毎回これを打ち込むのも面倒ですので、 `foo.tcl` に書いておきましょう。
 
@@ -339,7 +339,7 @@ TFTP サーバーがない場合は、`con 0x04000000` の前に
   - `fsbl.elf`: FSBL (First Stage Boot Loader)。XSDK で生成。
   - `fpga.bit`: FPGA bit file (Optional)
   - `u-boot/u-boot-dtb.bin`: STEP1 で作成したもの
-  - `bootgen`: Vivado (または ISE)のインストールディレクトリに入っている
+  - `bootgen`: ISE / Vivado のインストールディレクトリに入っている
 
 ##### Output Files Produced
 
@@ -353,10 +353,15 @@ TFTP サーバーがない場合は、`con 0x04000000` の前に
     {
             [bootloader]fsbl.elf
             fpga.bit
-            [load=0x04000000]u-boot/u-boot-dtb.bin
+            [load=0x04000000,startup=0x04000000]u-boot/u-boot-dtb.bin
     }
 
 FPGA Bit file のダウンロードが不要なら `fpga.bit` の行は削除してよい。
+
+ELF ファイルはロードアドレスとエントリーアドレスを自動抽出してくれるが、
+バイナリの場合は `load=` と `startup=` で指定する必要がある。
+
+あとは
 
     $ bootgen -image foo.bif -w on -o boot.bin
 
