@@ -148,9 +148,9 @@ PC1 上で動いている XSDK 上で
 
 メニュー「Xilinx Tools」→「Configure JTAG Settings」を選び、
 
-  - Type: Xilinx Hardware Server
-  - Hostname: hw_server を起動したPC (この場合PC2) のIPアドレス
-  - Port: hw_server で開いているポート (この場合 3122)
+- Type: Xilinx Hardware Server
+- Hostname: hw_server を起動したPC (この場合PC2) のIPアドレス
+- Port: hw_server で開いているポート (この場合 3122)
 
 を設定する。
 

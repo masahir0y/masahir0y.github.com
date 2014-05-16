@@ -14,35 +14,35 @@ U-Boot と Linux のメインラインで Zynq を動かす方法を紹介しま
 
 使用するのは、
 
-  - U-Boot 2014.04
-  - Linux Kernel 3.14
-  - Zynq ZC706 ボード
+- U-Boot 2014.04
+- Linux Kernel 3.14
+- Zynq ZC706 ボード
 
 です。
 
 その前に、 Zynq のブートシーケンスを復習しておきましょう。
 Active Boot (= JTAG ブート以外)は
 
-  1. Boot ROM
+1. Boot ROM
 
-  2. FSBL
+2. FSBL
 
-  3. U-Boot
+3. U-Boot
 
-  4. Linux Kernel
+4. Linux Kernel
 
 というのが、Xilinx が公式にサポートしているブートシーケンスで、
 [Xilinx Wiki ページ](http://www.wiki.xilinx.com/)もこのやり方を紹介しています。
 
 最近の U-Boot では
 
-  1. Boot ROM
+1. Boot ROM
 
-  2. U-Boot SPL
+2. U-Boot SPL
 
-  3. U-Boot
+3. U-Boot
 
-  4. Linux Kernel
+4. Linux Kernel
 
 というブートシーケンスも可能になっています。
 
@@ -57,11 +57,11 @@ XSDK (Xilinx SDK) を起動しなくても済む、ということです。
 
 さらに簡略化した
 
-  1. Boot ROM
+1. Boot ROM
 
-  2. U-Boot SPL
+2. U-Boot SPL
 
-  3. Linux Kernel
+3. Linux Kernel
 
 というブートシーケンスもあります。 (Falcon ブートといいます)
 
@@ -76,16 +76,16 @@ XSDK (Xilinx SDK) を起動しなくても済む、ということです。
 
 ##### Input Files Required
 
-  - ARM Cross Compiler
-  - `ps7_init.c`: ISE / Vivado で "Export Hardware for SDK" を実行すると出力される
-  - `ps7_init.h`: ISE / Vivado で "Export Hardware for SDK" を実行すると出力される
+- ARM Cross Compiler
+- `ps7_init.c`: ISE / Vivado で "Export Hardware for SDK" を実行すると出力される
+- `ps7_init.h`: ISE / Vivado で "Export Hardware for SDK" を実行すると出力される
 
 ##### Output Files Produced
 
-  - `u-boot.bin`: U-Boot 本体の RAWバイナリ
-  - `u-boot.img`: `u-boot.bin` に uImage ヘッダーをつけたもの
-  - `spl/u-boot-spl.bin`: U-Boot SPLの RAWバイナリ
-  - `tools/mkimage`: u-boot で扱うイメージを生成するツール。
+- `u-boot.bin`: U-Boot 本体の RAWバイナリ
+- `u-boot.img`: `u-boot.bin` に uImage ヘッダーをつけたもの
+- `spl/u-boot-spl.bin`: U-Boot SPLの RAWバイナリ
+- `tools/mkimage`: u-boot で扱うイメージを生成するツール。
 
 ##### Task Description
 
@@ -173,12 +173,12 @@ TFTP サーバーがなくても、動かすことはできるので、ない人
 
 ##### Input Files Required
 
-  - ARM Cross Compiler
+- ARM Cross Compiler
 
 ##### Output Files Produced
 
-  - `arch/arm/boot/zImage`: Kernel Image
-  - `arch/arm/boot/dts/zynq-zc706.dtb`: Kernel をコンフィグレーションする DTB (Device Tree Blob)
+- `arch/arm/boot/zImage`: Kernel Image
+- `arch/arm/boot/dts/zynq-zc706.dtb`: Kernel をコンフィグレーションする DTB (Device Tree Blob)
 
 (従来、 U-Boot から Kernel を起動するときは `arch/arm/boot/uImage` を使っていたが、これは使わない。)
 
@@ -227,11 +227,11 @@ TFTP サーバーがなくても、動かすことはできるので、ない人
 
 ##### Input Files Required
 
-  - None
+- None
 
 ##### Output Files Produced
 
-  - `arm_ramdisk.image.gz`: Kernel がマウントする init ramdisk (を gzip 圧縮したもの)
+- `arm_ramdisk.image.gz`: Kernel がマウントする init ramdisk (を gzip 圧縮したもの)
 
 ##### Task Description
 
@@ -242,16 +242,16 @@ arm_ramdisk.image.gz をダウンロードする。
 
 ##### Input Files Required
 
-  - `linux/arch/arm/boot/zImage`
-  - `arm_ramdisk.image.gz`
-  - `linux/arch/arm/boot/dts/zynq-zc706.dtb`
-  - `u-boot/tools/mkimage`
+- `linux/arch/arm/boot/zImage`
+- `arm_ramdisk.image.gz`
+- `linux/arch/arm/boot/dts/zynq-zc706.dtb`
+- `u-boot/tools/mkimage`
 
 カレントディレクトリから見て、上記の配置になっているとする。
 
 ##### Output Files Produced
 
-  - `fit.itb`: U-Boot から Kernel を起動するためのイメージ
+- `fit.itb`: U-Boot から Kernel を起動するためのイメージ
 
 ##### Task Description
 
@@ -328,12 +328,12 @@ ITB を作るには、 ITS(Image Tree Source) を記述して、 `mkimage` に�
 
 ##### Input Files Required
 
-  - `u-boot.bin`: STEP1 で作成したもの
-  - `fit.itb`: STEP4 で作成したもの
-  - `xmd`: ISE / Vivado のインストールディレクトリに入っている
-  - `ps7_init.tcl`: ISE / Vivado から "Export Hardware for SDK" を実行すると出力される
-  - `stub.tcl`: Xilinx のページからダウンロードできる `ug873-design-files.zip` の中に入っている
-  - `fpga.bit`: ISE / Vivado で生成した FPGA bit file (Optional)
+- `u-boot.bin`: STEP1 で作成したもの
+- `fit.itb`: STEP4 で作成したもの
+- `xmd`: ISE / Vivado のインストールディレクトリに入っている
+- `ps7_init.tcl`: ISE / Vivado から "Export Hardware for SDK" を実行すると出力される
+- `stub.tcl`: Xilinx のページからダウンロードできる `ug873-design-files.zip` の中に入っている
+- `fpga.bit`: ISE / Vivado で生成した FPGA bit file (Optional)
 
 ##### Task Description
 
@@ -384,12 +384,12 @@ TFTP サーバーがない場合は、`con 0x04000000` の前に
 
 ##### Input Files Required
 
-  - `u-boot/spl/u-boot-spl.bin`: STEP1 で作成したもの
-  - `bootgen`: ISE / Vivado のインストールディレクトリに入っている
+- `u-boot/spl/u-boot-spl.bin`: STEP1 で作成したもの
+- `bootgen`: ISE / Vivado のインストールディレクトリに入っている
 
 ##### Output Files Produced
 
-  - `boot.bin`
+- `boot.bin`
 
 ##### Task Description
 
@@ -411,11 +411,11 @@ TFTP サーバーがない場合は、`con 0x04000000` の前に
 
 ##### Input Files Required
 
-  - `u-boot/spl/u-boot-spl.bin`: STEP1 で作成したもの
+- `u-boot/spl/u-boot-spl.bin`: STEP1 で作成したもの
 
 ##### Output Files Produced
 
-  - `boot.bin`
+- `boot.bin`
 
 ##### Task Description
 
@@ -444,9 +444,9 @@ make すると自動で `boot.bin` までできるので、更に楽なのです
 
 ##### Input Files Required
 
-  - `boot.bin`: STEP6 または STEP6B で作成したもの
-  - `u-boot.img`: STEP1 で作成したもの
-  - `fit.itb`: STEP4 で作成したもの
+- `boot.bin`: STEP6 または STEP6B で作成したもの
+- `u-boot.img`: STEP1 で作成したもの
+- `fit.itb`: STEP4 で作成したもの
 
 ##### Task Description
 
@@ -466,14 +466,14 @@ STEP6 の部分を以下のようにアレンジすればよいです。
 
 ##### Input Files Required
 
-  - `fsbl.elf`: FSBL (First Stage Boot Loader)。XSDK で生成。
-  - `fpga.bit`: FPGA bit file (Optional)
-  - `u-boot/u-boot.bin`: STEP1 で作成したもの
-  - `bootgen`: ISE / Vivado のインストールディレクトリに入っている
+- `fsbl.elf`: FSBL (First Stage Boot Loader)。XSDK で生成。
+- `fpga.bit`: FPGA bit file (Optional)
+- `u-boot/u-boot.bin`: STEP1 で作成したもの
+- `bootgen`: ISE / Vivado のインストールディレクトリに入っている
 
 ##### Output Files Produced
 
-  - `boot.bin`
+- `boot.bin`
 
 ##### Task Description
 

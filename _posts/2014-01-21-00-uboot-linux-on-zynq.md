@@ -25,17 +25,17 @@ Xilinx ローカルリポジトリを追跡しなくても動かせるように�
 
 今回使うのは
 
-  - U-Boot 2014.01
-  - Linux Kernel 3.13
-  - Zynq ZC706 ボード
+- U-Boot 2014.01
+- Linux Kernel 3.13
+- Zynq ZC706 ボード
 
 です。
 
 ただし、Wiki Page で紹介されているやり方と結構違います。主な違いは
 
-  - U-Boot 自身のコンフィグレーションにも Device Tree が必要
-  - Kernel のイメージは、従来のレガシー uImage ではなく、 FIT (Flattened uImage Tree) を使う
-  - Kernel の defconfig は `multi_v7_defconfig` を使う
+- U-Boot 自身のコンフィグレーションにも Device Tree が必要
+- Kernel のイメージは、従来のレガシー uImage ではなく、 FIT (Flattened uImage Tree) を使う
+- Kernel の defconfig は `multi_v7_defconfig` を使う
 
 入門者には何言っているかわからないかもしれないが、以下で丁寧に手順を説明します。
 
@@ -43,11 +43,11 @@ Xilinx ローカルリポジトリを追跡しなくても動かせるように�
 
 ##### Input Files Required
 
-  - None
+- None
 
 ##### Output Files Produced
 
-  -  `dtc`: Device Tree Compiler
+- `dtc`: Device Tree Compiler
 
 ##### Task Description
 
@@ -74,13 +74,13 @@ U-Boot を Device Tree 付きでビルドするには version 1.4 以降の DTC 
 
 ##### Input Files Required
 
-  - `dtc`
-  - ARM Cross Compiler
+- `dtc`
+- ARM Cross Compiler
 
 ##### Output Files Produced
 
-  - `u-boot-dtb.bin`: u-boot の RAWバイナリと u-boot をコンフィグレーションする DTB を連結したもの
-  - `tools/mkimage`: u-boot で扱うイメージを生成するツール。
+- `u-boot-dtb.bin`: u-boot の RAWバイナリと u-boot をコンフィグレーションする DTB を連結したもの
+- `tools/mkimage`: u-boot で扱うイメージを生成するツール。
 
 (Wiki Page では `u-boot` を使っているが、これは使わない。)
 
@@ -125,12 +125,12 @@ TFTP サーバーがなくても、動かすことはできるので、ない人
 
 ##### Input Files Required
 
-  - ARM Cross Compiler
+- ARM Cross Compiler
 
 ##### Output Files Produced
 
-  - `arch/arm/boot/zImage`: Kernel Image
-  - `arch/arm/boot/dts/zynq-zc706.dtb`: Kernel をコンフィグレーションする DTB (Device Tree Blob)
+- `arch/arm/boot/zImage`: Kernel Image
+- `arch/arm/boot/dts/zynq-zc706.dtb`: Kernel をコンフィグレーションする DTB (Device Tree Blob)
 
 (従来、 U-Boot から Kernel を起動するときは `arch/arm/boot/uImage` を使っていたが、これは使わない。)
 
@@ -179,11 +179,11 @@ TFTP サーバーがなくても、動かすことはできるので、ない人
 
 ##### Input Files Required
 
-  - None
+- None
 
 ##### Output Files Produced
 
-  - `arm_ramdisk.image.gz`: Kernel がマウントする init ramdisk (を gzip 圧縮したもの)
+- `arm_ramdisk.image.gz`: Kernel がマウントする init ramdisk (を gzip 圧縮したもの)
 
 ##### Task Description
 
@@ -194,16 +194,16 @@ arm_ramdisk.image.gz をダウンロードする。
 
 ##### Input Files Required
 
-  - `linux/arch/arm/boot/zImage`
-  - `arm_ramdisk.image.gz`
-  - `linux/arch/arm/boot/dts/zynq-zc706.dtb`
-  - `u-boot/tools/mkimage`
+- `linux/arch/arm/boot/zImage`
+- `arm_ramdisk.image.gz`
+- `linux/arch/arm/boot/dts/zynq-zc706.dtb`
+- `u-boot/tools/mkimage`
 
 カレントディレクトリから見て、上記の配置になっているとする。
 
 ##### Output Files Produced
 
-  - `fit.itb`: U-Boot から Kernel を起動するためのイメージ
+- `fit.itb`: U-Boot から Kernel を起動するためのイメージ
 
 ##### Task Description
 
@@ -280,12 +280,12 @@ ITB を作るには、 ITS(Image Tree Source) を記述して、 `mkimage` に�
 
 ##### Input Files Required
 
-  - `u-boot-dtb.bin`: STEP1 で作成したもの
-  - `fit.itb`: STEP4 で作成したもの
-  - `xmd`: ISE / Vivado のインストールディレクトリに入っている
-  - `ps7_init.tcl`: ISE / Vivado から "Export Hardware for SDK" を実行すると出力される
-  - `stub.tcl`: Xilinx のページからダウンロードできる `ug873-design-files.zip` の中に入っている
-  - `fpga.bit`: ISE / Vivado で生成した FPGA bit file (Optional)
+- `u-boot-dtb.bin`: STEP1 で作成したもの
+- `fit.itb`: STEP4 で作成したもの
+- `xmd`: ISE / Vivado のインストールディレクトリに入っている
+- `ps7_init.tcl`: ISE / Vivado から "Export Hardware for SDK" を実行すると出力される
+- `stub.tcl`: Xilinx のページからダウンロードできる `ug873-design-files.zip` の中に入っている
+- `fpga.bit`: ISE / Vivado で生成した FPGA bit file (Optional)
 
 ##### Task Description
 
@@ -336,14 +336,14 @@ TFTP サーバーがない場合は、`con 0x04000000` の前に
 
 ##### Input Files Required
 
-  - `fsbl.elf`: FSBL (First Stage Boot Loader)。XSDK で生成。
-  - `fpga.bit`: FPGA bit file (Optional)
-  - `u-boot/u-boot-dtb.bin`: STEP1 で作成したもの
-  - `bootgen`: ISE / Vivado のインストールディレクトリに入っている
+- `fsbl.elf`: FSBL (First Stage Boot Loader)。XSDK で生成。
+- `fpga.bit`: FPGA bit file (Optional)
+- `u-boot/u-boot-dtb.bin`: STEP1 で作成したもの
+- `bootgen`: ISE / Vivado のインストールディレクトリに入っている
 
 ##### Output Files Produced
 
-  - `boot.bin`
+- `boot.bin`
 
 ##### Task Description
 
@@ -372,8 +372,8 @@ ELF ファイルはロードアドレスとエントリーアドレスを自動�
 
 ##### Input Files Required
 
-  - `boot.bin`: STEP6 で作成したもの
-  - `fit.itb`: STEP4 で作成したもの
+- `boot.bin`: STEP6 で作成したもの
+- `fit.itb`: STEP4 で作成したもの
 
 ##### Task Description
 
@@ -402,19 +402,19 @@ Linux の Device Tree も `arch/arm/boot/dts` ディレクトリに各ボード�
 
 ### その他参照資料
 
-  - Device Tree を用いた U-Boot のコンフィグレーションについて知りたい場合は
-    U-Boot ソースツリーの `doc/README.fdt-control` を参照
+- Device Tree を用いた U-Boot のコンフィグレーションについて知りたい場合は
+  U-Boot ソースツリーの `doc/README.fdt-control` を参照
 
-  - ITS (Image Tree Source) の書き方を知りたい場合は U-Boot ソースツリーの
-    `doc/uImage.FIT/` 以下のドキュメント参照
+- ITS (Image Tree Source) の書き方を知りたい場合は U-Boot ソースツリーの
+  `doc/uImage.FIT/` 以下のドキュメント参照
 
-  - XMD の使い方は Xilinx の資料 "Embedded System Tools Reference Manual" 参照
+- XMD の使い方は Xilinx の資料 "Embedded System Tools Reference Manual" 参照
 
-  - FSBL の作り方は Xilinx の資料
-    "Zynq-7000 All Programmable SoC: Concepts, Tools, and Techniques" 5章を参照
+- FSBL の作り方は Xilinx の資料
+  "Zynq-7000 All Programmable SoC: Concepts, Tools, and Techniques" 5章を参照
 
-  - Bootgen をもっと詳しく知りたい場合は Xilinx の資料
-    "Zynq-7000 All Programmable SoC Software Developers Guide" 参照
+- Bootgen をもっと詳しく知りたい場合は Xilinx の資料
+  "Zynq-7000 All Programmable SoC Software Developers Guide" 参照
 
 ### ご注意
 

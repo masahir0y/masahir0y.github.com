@@ -14,9 +14,9 @@ ISE と Vivado を Ubuntu にインストールします。
 
 バージョンによって若干の差があるかもしれないので、ここでは以下のバージョンとします。
 
-  - Vivado 2013.2
-  - ISE 14.6
-  - Ubuntu 2013.04 64bit
+- Vivado 2013.2
+- ISE 14.6
+- Ubuntu 2013.04 64bit
 
 ### Vivado のセットアップ
 

@@ -35,8 +35,8 @@ ISE も一応理解はしておいた方がよいと思います。
 
 ツールや用語の説明。 PS と PL という用語は何度も出てくるので抑えておきましょう。
 
-  - PS (Processing System): CPU 部のこと。ARM と周辺のハード。
-  - PL (Programmable Logic): FPGA 部のこと
+- PS (Processing System): CPU 部のこと。ARM と周辺のハード。
+- PL (Programmable Logic): FPGA 部のこと
 
 #### Chapter 2: Embedded System Design Using the Zynq Processing System
 
@@ -69,16 +69,16 @@ Master Boot に使うブートイメージの作り方を学ぶ。
 
 基本的に、チュートリアルの内容と同等のことが Vivado できるはずですが、差分をいくつかピックアップ。
 
-  - ISE で XPS でやっている部分は、Vivado では 「IP Integrator」 → 「Create Block Design」で行う。
+- ISE で XPS でやっている部分は、Vivado では 「IP Integrator」 → 「Create Block Design」で行う。
 
-  - Chapter3 で「Chipscope AXI Monitor」という IP を接続していますが、
-    これは Vivado にはないので、飛ばします。
-    Vivado には Chipscope 自体がありませんので。
-    普通に Vivado Logic Analyzer で AXI バスをモニタすればいいので、なくても困りません。
+- Chapter3 で「Chipscope AXI Monitor」という IP を接続していますが、
+  これは Vivado にはないので、飛ばします。
+  Vivado には Chipscope 自体がありませんので。
+  普通に Vivado Logic Analyzer で AXI バスをモニタすればいいので、なくても困りません。
 
-  - Chapter6 で 「AXI Central DMA」 というIP を接続していますが、
-    Vivado では 「AXI Central Direct Memory Access」という名前になっています。
-    検索ボックスに 「DMA」といれてもヒットしなくて、しばらく考え込みました。。
+- Chapter6 で 「AXI Central DMA」 というIP を接続していますが、
+  Vivado では 「AXI Central Direct Memory Access」という名前になっています。
+  検索ボックスに 「DMA」といれてもヒットしなくて、しばらく考え込みました。。
 
 ### 起動シーケンスまとめ
 
@@ -88,11 +88,11 @@ Zynq は 5つの起動モードがあります。
 
 電源投入時に、特定の端子が Pull Up されているか Pull Down されているかで起動モードを選択できます。
 
-  - QSPI
-  - NAND
-  - NOR
-  - SD card
-  - JTAG
+- QSPI
+- NAND
+- NOR
+- SD card
+- JTAG
 
 QSPI, NAND, NOR, SD card から起動するのを Master Boot といいます。
 JTAG ブートは Slave Boot といいます。
@@ -145,23 +145,23 @@ ZC706 にのっている Zynq (xc7z045ffg900) の FPGA の bit stream は 13MB �
 
 Zynq はリセット解除後、(Master Boot も Slave Bootも)必ず Boot ROM から実行を開始します。
 
-  1. Boot ROM
+1. Boot ROM
 
-  Mask Rom なので変更不可。
-  端子情報を元に、 QSPI/NAND/Nor/SD card のいずれかから起動イメージを読み出す。
-  FSBL を SRAM へロードし、FSBL に制御を移す。
+    Mask Rom なので変更不可。
+    端子情報を元に、 QSPI/NAND/Nor/SD card のいずれかから起動イメージを読み出す。
+    FSBL を SRAM へロードし、FSBL に制御を移す。
 
-  2. FSBL (First Stage Boot Loader)
+2. FSBL (First Stage Boot Loader)
 
-  (XSDK で生成した FSBL の場合)
-  起動イメージに FPGA の bit stream が含まれていれば、FPGA へダウンロードする。
-  必要なピン設定や DDR の初期化を行い、 User Program を DDR へロードし、 User Program に制御を移す。
+    (XSDK で生成した FSBL の場合)
+    起動イメージに FPGA の bit stream が含まれていれば、FPGA へダウンロードする。
+    必要なピン設定や DDR の初期化を行い、 User Program を DDR へロードし、 User Program に制御を移す。
 
-  3. User Program
+3. User Program
 
-  何をするかは User Program の作り方次第ですが、Linux を動かすのなら、
-  この User Program の部分は U-Boot でしょう。
-  U-Boot がなんらかの不揮発デバイスから（またはネットワーク経由で）Kernel をロードします。
+    何をするかは User Program の作り方次第ですが、Linux を動かすのなら、
+    この User Program の部分は U-Boot でしょう。
+    U-Boot がなんらかの不揮発デバイスから（またはネットワーク経由で）Kernel をロードします。
 
 #### Slave Boot のブートシーケンス
 
@@ -173,17 +173,17 @@ JTAG 経由で行う必要があります。
 
 以下が、そのシーケンスです。
 
-  1. Boot ROM
+1. Boot ROM
 
-  ARM は簡単な初期化をした後、JTAG コマンド待ちのループに入る。
+    ARM は簡単な初期化をした後、JTAG コマンド待ちのループに入る。
 
-  2. FPGA コンフィグレーション
+2. FPGA コンフィグレーション
 
-  (もし必要なら）JTAG経由で FPGA の bit stream をダウンロードする。
+    (もし必要なら）JTAG経由で FPGA の bit stream をダウンロードする。
 
-  3. JTAG から ピン設定や DDR の初期化を行う。
+3. JTAG から ピン設定や DDR の初期化を行う。
 
-  4. JTAG から User Program を DDR (または SRAM) へダウンロードし、CPU を走らせる。
+4. JTAG から User Program を DDR (または SRAM) へダウンロードし、CPU を走らせる。
 
 チュートリアルの Chapter 2 ～ Chapter 4 でやっているのはこの Slave Boot です。
 
