@@ -59,7 +59,7 @@ U-Boot を Device Tree 付きでビルドするには version 1.4 以降の DTC 
 
 バージョンが 1.4.0 よりも古い場合は、自分でビルドします。
 
-    $ git clone git://git.jdl.com/software/dtc.git
+    $ git clone git://git.kernel.org/pub/scm/utils/dtc/dtc.git
 
 でソースを取ってきて
 
