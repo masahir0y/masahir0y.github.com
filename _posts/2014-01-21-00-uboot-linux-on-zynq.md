@@ -2,7 +2,7 @@
 layout: post
 title: U-Boot と Linux Kernel のメインラインで Zynq を動かす
 description: ""
-tags: [Zynq,Linux Kernel,U-Boot]
+tags: [Zynq, Linux Kernel, U-Boot]
 ---
 {% include JB/setup %}
 
