@@ -162,7 +162,7 @@ TFTP サーバーがなくても、動かすことはできるので、ない人
 
 もしくは
 
-    $ make zynq_zc70x CROSS_COMPILE=arm-linux-gnueabi-
+    $ make zynq_zc70x_config all CROSS_COMPILE=arm-linux-gnueabi-
 
 のように 1行で、コンフィグレーションとビルドを同時にすることもできる。
 
