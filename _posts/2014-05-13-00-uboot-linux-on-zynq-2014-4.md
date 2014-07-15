@@ -85,7 +85,7 @@ XSDK (Xilinx SDK) を起動しなくても済む、ということです。
 - `u-boot.bin`: U-Boot 本体の RAWバイナリ
 - `u-boot.img`: `u-boot.bin` に uImage ヘッダーをつけたもの
 - `spl/u-boot-spl.bin`: U-Boot SPLの RAWバイナリ
-- `tools/mkimage`: u-boot で扱うイメージを生成するツール。
+- `tools/mkimage`: U-Boot で扱うイメージを生成するツール。
 
 ##### Task Description
 
@@ -268,7 +268,7 @@ ITB を作るには、 ITS(Image Tree Source) を記述して、 `mkimage` に�
     
             images {
                     kernel@1 {
-                            description = "Linux Kernel 3.13 configured with multi_v7_defconfig";
+                            description = "Linux Kernel 3.14 configured with multi_v7_defconfig";
                             data = /incbin/("linux/arch/arm/boot/zImage");
                             type = "kernel";
                             arch = "arm";

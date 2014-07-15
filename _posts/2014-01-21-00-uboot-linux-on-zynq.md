@@ -79,8 +79,8 @@ U-Boot を Device Tree 付きでビルドするには version 1.4 以降の DTC 
 
 ##### Output Files Produced
 
-- `u-boot-dtb.bin`: u-boot の RAWバイナリと u-boot をコンフィグレーションする DTB を連結したもの
-- `tools/mkimage`: u-boot で扱うイメージを生成するツール。
+- `u-boot-dtb.bin`: U-Boot の RAWバイナリと U-Boot をコンフィグレーションする DTB を連結したもの
+- `tools/mkimage`: U-Boot で扱うイメージを生成するツール。
 
 (Wiki Page では `u-boot` を使っているが、これは使わない。)
 
